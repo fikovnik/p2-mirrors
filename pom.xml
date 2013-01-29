@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>net.fikovnik.projects.p2</groupId>
+  <artifactId>p2-mirrors</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <properties>
+    <tycho.version>0.16.0</tycho.version>
+  </properties>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>2.5</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-p2-repository-plugin</artifactId>
+          <version>${tycho.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.tycho.extras</groupId>
+        <artifactId>tycho-p2-extras-plugin</artifactId>
+        <version>${tycho.version}</version>
+        <executions>
+          <execution>
+            <id>mirror-eclipse-indigo</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>mirror</goal>
+            </goals>
+            <configuration>
+              <source>
+                <repository>
+                  <!--<url>http://mirrors.ibiblio.org/eclipse/releases/indigo/</url> -->
+                  <!--<url>http://mirror.ibcp.fr/pub/eclipse/releases/indigo/</url>-->
+                  <!--<url>http://ftp.sh.cvut.cz/MIRRORS/eclipse/releases/indigo/</url> -->
+                  <url>http://download.eclipse.org/releases/indigo/</url> 
+                  <layout>p2</layout>
+                </repository>
+              </source>
+              <destination>${basedir}/repository/eclipse-indigo</destination>
+            </configuration>
+          </execution>
+          <execution>
+            <id>mirror-scala-ide</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>mirror</goal>
+            </goals>
+            <configuration>
+              <source>
+                <repository>
+                  <url>http://download.scala-ide.org/sdk/e37/scala210/dev/site/</url> 
+                  <layout>p2</layout>
+                </repository>
+              </source>
+              <destination>${basedir}/repository/scala-ide</destination>
+            </configuration>
+          </execution>
+          <execution>
+            <id>mirror-eclipse-emf</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>mirror</goal>
+            </goals>
+            <configuration>
+              <source>
+                <repository>
+                  <url>http://download.eclipse.org/modeling/emf/emf/updates/releases/</url> 
+                  <layout>p2</layout>
+                </repository>
+              </source>
+              <destination>${basedir}/repository/eclipse-emf</destination>
+            </configuration>
+          </execution>
+          <execution>
+            <id>mirror-eclipse-swtbot</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>mirror</goal>
+            </goals>
+            <configuration>
+              <source>
+                <repository>
+                  <url>http://download.eclipse.org/technology/swtbot/helios/dev-build/update-site</url> 
+                  <layout>p2</layout>
+                </repository>
+              </source>
+              <destination>${basedir}/repository/eclipse-swtbot</destination>
+            </configuration>
+          </execution>
+          <execution>
+            <id>mirror-google-guava</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>mirror</goal>
+            </goals>
+            <configuration>
+              <source>
+                <repository>
+                  <url>http://guava-osgi.googlecode.com/svn/trunk/repository</url> 
+                  <layout>p2</layout>
+                </repository>
+              </source>
+              <destination>${basedir}/repository/google-guava</destination>
+            </configuration>
+          </execution>
+
+        </executions>
+        <configuration>
+          <!-- starting from here all configuration parameters are optional -->
+          <!-- they are only shown here with default values for documentation purpose -->
+
+          <!-- List of IUs to mirror. If omitted, allIUs will be mirrored. -->
+          <!-- Omitted IU version element means latest version of the IU -->
+<!--          <ius>
+            <iu>
+              <id>org.eclipse.rcp.feature.group</id>
+            </iu>
+            <iu>
+              <query>
+                <expression>id == $0 && version == $1</expression>
+                <parameters>org.eclipse.tycho.sampleid,1.0.0</parameters>
+              </query>
+            </iu>
+          </ius>
+ -->
+          <!-- The destination directory to mirror to. -->
+          <destination>${basedir}/repository</destination>
+          <!-- Whether only strict dependencies should be followed. -->
+          <!-- "strict" means perfect version match -->
+          <followStrictOnly>false</followStrictOnly>
+          <!-- Whether or not to follow optional requirements. -->
+          <includeOptional>true</includeOptional>
+          <!-- Whether or not to follow non-greedy requirements. -->
+          <includeNonGreedy>true</includeNonGreedy>
+          <!-- Filter properties. E.g. filter only one platform -->
+<!--          <filter>
+            <osgi.os>linux</osgi.os>
+            <osgi.ws>gtk</osgi.ws>
+            <osgi.arch>x86_64</osgi.arch>
+          </filter>
+ -->          <!-- Whether to filter the resulting set of IUs to only -->
+          <!-- include the latest version of each IU -->
+          <latestVersionOnly>false</latestVersionOnly>
+          <!-- don't mirror artifacts, only metadata -->
+          <mirrorMetadataOnly>false</mirrorMetadataOnly>
+          <!-- whether to compress the content.xml/artifacts.xml -->
+          <compress>true</compress>
+          <!-- whether to append to the target repository content -->
+          <append>true</append>
+          <!-- whether to mirror pack200 artifacts also. Available since tycho-extras 0.17.0 -->
+          <verbose>true</verbose>
+          <includePacked>true</includePacked>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
