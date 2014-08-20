@@ -35,7 +35,7 @@
         <version>${tycho.version}</version>
         <executions>
           <execution>
-            <id>mirror-eclipse-indigo</id>
+            <id>mirror-eclipse-kepler</id>
             <phase>prepare-package</phase>
             <goals>
               <goal>mirror</goal>
@@ -43,18 +43,18 @@
             <configuration>
               <source>
                 <repository>
-                  <!--<url>http://mirrors.ibiblio.org/eclipse/releases/indigo/</url> -->
-                  <!--<url>http://mirror.ibcp.fr/pub/eclipse/releases/indigo/</url>-->
-                  <!--<url>http://ftp.sh.cvut.cz/MIRRORS/eclipse/releases/indigo/</url> -->
-                  <url>http://download.eclipse.org/releases/indigo/</url> 
+                  <!--<url>http://mirrors.ibiblio.org/eclipse/releases/kepler/</url> -->
+                  <!--<url>http://mirror.ibcp.fr/pub/eclipse/releases/kepler/</url>-->
+                  <!--<url>http://ftp.sh.cvut.cz/MIRRORS/eclipse/releases/kepler/</url> -->
+                  <url>http://download.eclipse.org/releases/kepler/</url> 
                   <layout>p2</layout>
                 </repository>
               </source>
-              <destination>${basedir}/repository/eclipse-indigo</destination>
+              <destination>${basedir}/repository/eclipse-kepler</destination>
             </configuration>
           </execution>
           <execution>
-            <id>mirror-scala-ide</id>
+            <id>mirror-eclipse-juno</id>
             <phase>prepare-package</phase>
             <goals>
               <goal>mirror</goal>
@@ -62,14 +62,33 @@
             <configuration>
               <source>
                 <repository>
-                  <url>http://download.scala-ide.org/sdk/e37/scala210/dev/site/</url> 
+                  <!--<url>http://mirrors.ibiblio.org/eclipse/releases/juno/</url> -->
+                  <!--<url>http://mirror.ibcp.fr/pub/eclipse/releases/juno/</url>-->
+                  <!--<url>http://ftp.sh.cvut.cz/MIRRORS/eclipse/releases/juno/</url> -->
+                  <url>http://download.eclipse.org/releases/juno/</url> 
                   <layout>p2</layout>
                 </repository>
               </source>
-              <destination>${basedir}/repository/scala-ide</destination>
+              <destination>${basedir}/repository/eclipse-juno</destination>
             </configuration>
           </execution>
           <execution>
+            <id>mirror-scala-ide-e38</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>mirror</goal>
+            </goals>
+            <configuration>
+              <source>
+                <repository>
+                  <url>http://download.scala-ide.org/sdk/e38/scala210/dev/site</url> 
+                  <layout>p2</layout>
+                </repository>
+              </source>
+              <destination>${basedir}/repository/scala-ide-e38</destination>
+            </configuration>
+          </execution>
+<!--          <execution>
             <id>mirror-eclipse-emf</id>
             <phase>prepare-package</phase>
             <goals>
@@ -83,6 +102,22 @@
                 </repository>
               </source>
               <destination>${basedir}/repository/eclipse-emf</destination>
+            </configuration>
+          </execution>
+          <execution>
+            <id>mirror-eclipse-uml</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>mirror</goal>
+            </goals>
+            <configuration>
+              <source>
+                <repository>
+                  <url>http://download.eclipse.org/modeling/mdt/uml2/updates/releases/</url> 
+                  <layout>p2</layout>
+                </repository>
+              </source>
+              <destination>${basedir}/repository/eclipse-uml</destination>
             </configuration>
           </execution>
           <execution>
@@ -102,7 +137,7 @@
             </configuration>
           </execution>
           <execution>
-            <id>mirror-google-guava</id>
+            <id>mirror-eclipse-xtext</id>
             <phase>prepare-package</phase>
             <goals>
               <goal>mirror</goal>
@@ -110,61 +145,78 @@
             <configuration>
               <source>
                 <repository>
-                  <url>http://guava-osgi.googlecode.com/svn/trunk/repository</url> 
+                  <url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/</url> 
                   <layout>p2</layout>
                 </repository>
               </source>
-              <destination>${basedir}/repository/google-guava</destination>
+              <destination>${basedir}/repository/eclipse-xtext</destination>
             </configuration>
           </execution>
-
-        </executions>
-        <configuration>
-          <!-- starting from here all configuration parameters are optional -->
-          <!-- they are only shown here with default values for documentation purpose -->
-
-          <!-- List of IUs to mirror. If omitted, allIUs will be mirrored. -->
-          <!-- Omitted IU version element means latest version of the IU -->
-<!--          <ius>
-            <iu>
-              <id>org.eclipse.rcp.feature.group</id>
-            </iu>
-            <iu>
-              <query>
-                <expression>id == $0 && version == $1</expression>
-                <parameters>org.eclipse.tycho.sampleid,1.0.0</parameters>
-              </query>
-            </iu>
-          </ius>
- -->
-          <!-- The destination directory to mirror to. -->
-          <destination>${basedir}/repository</destination>
-          <!-- Whether only strict dependencies should be followed. -->
-          <!-- "strict" means perfect version match -->
-          <followStrictOnly>false</followStrictOnly>
-          <!-- Whether or not to follow optional requirements. -->
-          <includeOptional>true</includeOptional>
-          <!-- Whether or not to follow non-greedy requirements. -->
-          <includeNonGreedy>true</includeNonGreedy>
-          <!-- Filter properties. E.g. filter only one platform -->
-<!--          <filter>
-            <osgi.os>linux</osgi.os>
-            <osgi.ws>gtk</osgi.ws>
-            <osgi.arch>x86_64</osgi.arch>
-          </filter>
- -->          <!-- Whether to filter the resulting set of IUs to only -->
-          <!-- include the latest version of each IU -->
-          <latestVersionOnly>false</latestVersionOnly>
-          <!-- don't mirror artifacts, only metadata -->
-          <mirrorMetadataOnly>false</mirrorMetadataOnly>
-          <!-- whether to compress the content.xml/artifacts.xml -->
-          <compress>true</compress>
-          <!-- whether to append to the target repository content -->
-          <append>true</append>
-          <!-- whether to mirror pack200 artifacts also. Available since tycho-extras 0.17.0 -->
-          <verbose>true</verbose>
-          <includePacked>true</includePacked>
-        </configuration>
+          <execution>
+            <id>mirror-eclipse-epsilon</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>mirror</goal>
+            </goals>
+            <configuration>
+              <source>
+                <repository>
+                  <url>http://download.eclipse.org/epsilon/updates/</url> 
+                  <layout>p2</layout>
+                </repository>
+              </source>
+              <destination>${basedir}/repository/eclipse-epsilon</destination>
+            </configuration>
+          </execution>
+           <execution>
+            <id>mirror-eclipse-ocl</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>mirror</goal>
+            </goals>
+            <configuration>
+              <source>
+                <repository>
+                  <url>http://download.eclipse.org/modeling/mdt/ocl/updates/releases/4.0.0/</url> 
+                  <layout>p2</layout>
+                </repository>
+              </source>
+              <destination>${basedir}/repository/eclipse-ocl</destination>
+            </configuration>
+          </execution>
+          <execution>
+            <id>mirror-eclipse-acceleo</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>mirror</goal>
+            </goals>
+            <configuration>
+              <source>
+                <repository>
+                  <url>http://download.eclipse.org/modeling/m2t/acceleo/updates/releases/3.3/</url> 
+                  <layout>p2</layout>
+                </repository>
+              </source>
+              <destination>${basedir}/repository/eclipse-acceleo</destination>
+            </configuration>
+          </execution>
+          <execution>
+            <id>mirror-eclipse-qvto</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>mirror</goal>
+            </goals>
+            <configuration>
+              <source>
+                <repository>
+                  <url>http://download.eclipse.org/mmt/qvto/updates/releases/</url> 
+                  <layout>p2</layout>
+                </repository>
+              </source>
+              <destination>${basedir}/repository/eclipse-qvto</destination>
+            </configuration>
+          </execution>
+ -->        </executions>
       </plugin>
     </plugins>
   </build>
